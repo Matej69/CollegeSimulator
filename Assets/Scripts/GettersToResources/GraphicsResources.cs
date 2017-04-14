@@ -5,7 +5,6 @@ public class GraphicsResources : MonoBehaviour {
 
     void Start()
     {
-        CharacterFactory.Instance().GenerateRandCharacters(1);
     }
 
     //GET CHARACTER SPRITES

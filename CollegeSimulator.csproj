@@ -63,17 +63,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CharacterInteraction.cs" />
-    <Compile Include="Assets\MainCamera.cs" />
+    <Compile Include="Assets\Scripts\Camera\MainCamera.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterFactory\CharacterFactory.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterInfo.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterInteraction.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterStats.cs" />
     <Compile Include="Assets\Scripts\Character\Controller\AController.cs" />
     <Compile Include="Assets\Scripts\Character\Controller\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Character\Controller\SelfController.cs" />
     <Compile Include="Assets\Scripts\Character\SpriteAnimator\SpriteAnimator.cs" />
+    <Compile Include="Assets\Scripts\EventManager\EventEnumType.cs" />
+    <Compile Include="Assets\Scripts\EventManager\EventManager.cs" />
+    <Compile Include="Assets\Scripts\GettersToResources\GraphicsResources.cs" />
     <Compile Include="Assets\Scripts\LevelManager\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\GraphicsResources.cs" />
     <Compile Include="Assets\Scripts\MultiplatformInput\MultiplatformInput.cs" />
     <Compile Include="Assets\Scripts\Timer\Timer.cs" />
   </ItemGroup>

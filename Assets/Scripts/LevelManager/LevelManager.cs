@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
 
-    static LevelManager ref_lvlManager;
-
+    static public LevelManager ref_lvlManager;
     static int MAX_CHAR = 200;
+
+    public GameObject ref_groundHolder;
+    public GameObject ref_charactersHolder;
 
     public GameObject[] prefab_ground;
 
@@ -14,7 +16,8 @@ public class LevelManager : MonoBehaviour {
     List<GameObject> buildings = new List<GameObject>();
     List<GameObject> ground = new List<GameObject>();
 
-    GameObject controlledCharacter;
+    [HideInInspector]
+    public GameObject controlledCharacter;
 
     void Awake()
     {
@@ -24,7 +27,7 @@ public class LevelManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         CreateCharacters(100);
-        CreateGround(50, 50, new Vector2(-10,-10));
+        CreateGround(30, 55, new Vector2(-10,-10));
 
     }
 	
@@ -36,7 +39,9 @@ public class LevelManager : MonoBehaviour {
     //******CREATE STUFF******
     private void CreateCharacters(int _charNum)
     {
-        characters = CharacterFactory.Instance().GenerateRandCharacters(_charNum);                
+        characters = CharacterFactory.Instance().GenerateRandCharacters(_charNum);
+        foreach (GameObject character in characters)
+            character.transform.parent = ref_charactersHolder.transform;               
     }
 
     private void CreateGround(int _xNum, int _yNum, Vector2 startPos)
@@ -50,7 +55,9 @@ public class LevelManager : MonoBehaviour {
             {
                 spawnPos = new Vector2(startPos.x + (groundDistance.x * x), startPos.y + (groundDistance.y * y));
                 int randID = (Random.Range(0, 5) == 0) ? 1 : 0 ;
-                ground.Add((GameObject)Instantiate(prefab_ground[randID], spawnPos, Quaternion.identity));
+                GameObject newGround = (GameObject)Instantiate(prefab_ground[randID], spawnPos, Quaternion.identity);
+                newGround.transform.parent = ref_groundHolder.transform;
+                ground.Add(newGround);
             }
     }
 
@@ -82,10 +89,14 @@ public class LevelManager : MonoBehaviour {
     }
 
 
-    //********SET CONTROLLED CHARACTER**********
+    //********CONTROLLED CHARACTER**********
     public void TakeControllOverChar(GameObject _char)
     {
         controlledCharacter = _char;        
+    }
+    public bool IsCharacterControlled()
+    {
+        return (controlledCharacter != null) ? true : false;
     }
 
 }
