@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 26c9d6fa552c79040ba31d038ec5b49d
-timeCreated: 1492042115
+timeCreated: 1492295781
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -49,6 +49,10 @@ TextureImporter:
     21300084: painting4
     21300086: carpet
     21300088: carpet2
+    21300090: EntitiesSheet_1
+    21300092: EntitiesSheet_2
+    21300094: EntitiesSheet_3
+    21300096: EntitiesSheet_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -452,12 +456,12 @@ TextureImporter:
       name: tree
       rect:
         serializedVersion: 2
-        x: 973
-        y: 1993
+        x: 974
+        y: 1994
         width: 63
         height: 148
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.47535342, y: 0.18824315}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -612,8 +616,8 @@ TextureImporter:
         y: 1127
         width: 96
         height: 117
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49511465, y: 0.26139322}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -677,6 +681,58 @@ TextureImporter:
         y: 1827
         width: 57
         height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_1
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 1669
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_2
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 847
+        width: 28
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_3
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 397
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_4
+      rect:
+        serializedVersion: 2
+        x: 1403
+        y: 645
+        width: 32
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

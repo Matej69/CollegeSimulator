@@ -12,9 +12,11 @@ public class LevelManager : MonoBehaviour {
 
     public GameObject[] prefab_ground;
 
-    List<GameObject> characters = new List<GameObject>();
-    List<GameObject> buildings = new List<GameObject>();
-    List<GameObject> ground = new List<GameObject>();
+    public List<GameObject> buildings = new List<GameObject>();
+    [HideInInspector]
+    public List<GameObject> characters = new List<GameObject>();
+    [HideInInspector]
+    public List<GameObject> ground = new List<GameObject>();
 
     [HideInInspector]
     public GameObject controlledCharacter;
@@ -26,8 +28,8 @@ public class LevelManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        CreateCharacters(100);
-        CreateGround(30, 55, new Vector2(-10,-10));
+        CreateCharacters(10);
+        CreateGround(68, 100, new Vector2(-45,-20));
 
     }
 	
@@ -54,7 +56,7 @@ public class LevelManager : MonoBehaviour {
             for (int y = 0; y < _yNum; ++y)
             {
                 spawnPos = new Vector2(startPos.x + (groundDistance.x * x), startPos.y + (groundDistance.y * y));
-                int randID = (Random.Range(0, 5) == 0) ? 1 : 0 ;
+                int randID = (Random.Range(0, 8) == 0) ? 1 : 0 ;
                 GameObject newGround = (GameObject)Instantiate(prefab_ground[randID], spawnPos, Quaternion.identity);
                 newGround.transform.parent = ref_groundHolder.transform;
                 ground.Add(newGround);

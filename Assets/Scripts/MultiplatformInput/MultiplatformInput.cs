@@ -8,7 +8,7 @@ public class MultiplatformInput : MonoBehaviour {
         MOUSE,
         FINGER
     }
-    static private E_INTERACTION_TYPE interactionType = E_INTERACTION_TYPE.MOUSE;
+    static public E_INTERACTION_TYPE interactionType = E_INTERACTION_TYPE.MOUSE;
 
     
 

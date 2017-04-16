@@ -5,7 +5,7 @@ public class MainCamera : MonoBehaviour {
 
     static public MainCamera ref_cam;
     
-    private float followSpeed = 1.7f;
+    private float followSpeed = 3f;
 
 
     void Awake()
@@ -26,6 +26,7 @@ public class MainCamera : MonoBehaviour {
         else
             FollowMouse();
 	}
+
 
 
 

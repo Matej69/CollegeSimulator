@@ -11,27 +11,44 @@ public class PlayerController : AController {
     }
     TravelInfo travelInfo;
 
-    private float walkSpeed = 3f;
-    private float runSpeed = 10f;
+    Rigidbody2D rigid;
+
+    private float walkSpeed = 3 * 50;
+    private float runSpeed = 10 * 50;
+
+    //Unity script
+    void OnEnable()
+    {
+        //EventManager.Subscribe(EventEnumType.E_EVENT_ID.DOOR_CLICKED, ChooseProperController);
+    }
+    void OnDisable()
+    {
+        //EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.DOOR_CLICKED, ChooseProperController);
+    }
+
 
     void Awake()
     {
         characterStats = GetComponent<CharacterStats>();
+        rigid = GetComponent<Rigidbody2D>();
     }
-
     // Use this for initialization
     void Start ()
     {
         travelInfo.travelDir = Vector2.zero;	
-	}
-	
+	}	
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
         if (characterStats.controlType == E_CHAR_CONTROLER.PLAYER_CONTROL)
-            HandleMovement();
+            HandleMovement();        
+    }
 
-
+    void FixedUpdate()
+    {
+        //travel to target pos
+        if (characterStats.controlType == E_CHAR_CONTROLER.PLAYER_CONTROL)
+            rigid.velocity = (travelInfo.travelDir * Time.deltaTime * walkSpeed);
     }
 
 
@@ -54,7 +71,8 @@ public class PlayerController : AController {
                 Rotate(E_SIDE.RIGHT);            
         }
         //travel to that pos
-        transform.Translate(travelInfo.travelDir * Time.deltaTime * walkSpeed);
+        //rigid.velocity = (travelInfo.travelDir * Time.deltaTime * walkSpeed);
+        //transform.Translate(travelInfo.travelDir * Time.deltaTime * walkSpeed);
         //check if we reached target position                                                
         if (Vector2.Distance(travelInfo.targetTravelPos, transform.position) < 0.05f)
         {

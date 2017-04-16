@@ -7,11 +7,14 @@ public class EventEnumType : MonoBehaviour
     public enum E_EVENT_ID
     {
         CHAR_CLICKED_ON,
-        TRAVEL_OUTSIDE,
-        TRAVEL_HOME,
+        ROOM_EXITED,
+        ROOM_ENTERED,
         BUILDING_LEAVE,
         BUILDING_ENTER,
-        CHAR_CONTROLLER_CHANGE
+        CHAR_CONTROLLER_CHANGE,
+        DOOR_HOVER,
+        DOOR_CLICKED,
+        DOOR_LEAVE
     }
 
 	
