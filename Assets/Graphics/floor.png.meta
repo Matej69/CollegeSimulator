@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0959456efce34f14f97d9d6214f227de
-timeCreated: 1492294227
+timeCreated: 1492348375
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,8 @@ TextureImporter:
     21300002: floor_1
     21300004: floor_2
     21300006: floor_3
+    21300008: floor_4
+    21300010: floor_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -103,6 +105,32 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: floor_4
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 49
+        width: 48
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: floor_5
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 145
+        width: 48
+        height: 47
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

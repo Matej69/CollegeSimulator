@@ -90,9 +90,8 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
 
     private void OnInTargetDoorRange()
     {
-        //transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
-        transform.position = RoomManager.ref_instance.GetDoorPoint(BuildingEnum.E_TYPE.HOUSE);
-        MainCamera.ref_cam.transform.position = RoomManager.ref_instance.GetDoorPoint(BuildingEnum.E_TYPE.HOUSE);
+        transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
+        MainCamera.ref_cam.transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
     }
     
 

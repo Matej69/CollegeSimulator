@@ -59,7 +59,7 @@ public class PlayerController : AController {
     override public void HandleMovement()
     {
         //Set new targetPos if mouse/finger up
-        if (MultiplatformInput.GetInput())
+        if (MultiplatformInput.GetInputDown())
         {
             characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
             travelInfo.targetTravelPos = MultiplatformInput.GetInputPos();
