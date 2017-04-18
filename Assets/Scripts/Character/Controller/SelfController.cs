@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterStats))]
+[RequireComponent(typeof(CharacterStatus))]
 public class SelfController : AController {
 
     Rigidbody2D rigid;
@@ -9,7 +9,7 @@ public class SelfController : AController {
     // Use this for initialization
     void Awake()
     {
-        characterStats = GetComponent<CharacterStats>();
+        characterStats = GetComponent<CharacterStatus>();
         rigid = GetComponent<Rigidbody2D>();
     }
 	

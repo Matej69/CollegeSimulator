@@ -7,7 +7,8 @@ public class Mouse : MonoBehaviour {
 
     public Sprite mouseNormal;
     public Sprite mouseDoorHover;
-    
+    public Sprite mouseInterEntityHover;
+
 
     void Start()
     {
@@ -22,8 +23,10 @@ public class Mouse : MonoBehaviour {
     {
         if (MultiplatformInput.interactionType == MultiplatformInput.E_INTERACTION_TYPE.MOUSE)
         {
-            EventManager.Subscribe(EventEnumType.E_EVENT_ID.DOOR_HOVER, SetHoverSprite);
+            EventManager.Subscribe(EventEnumType.E_EVENT_ID.DOOR_HOVER, SetDoorHoverSprite);
             EventManager.Subscribe(EventEnumType.E_EVENT_ID.DOOR_LEAVE, SetNormalSprite);
+            EventManager.Subscribe(EventEnumType.E_EVENT_ID.INTERACTABLE_HOVER, SetInterEntityHoverSprite);
+            EventManager.Subscribe(EventEnumType.E_EVENT_ID.INTERACTABLE_LEAVE, SetNormalSprite);
         }
         //EventManager.Subscribe(EventEnumType.E_EVENT_ID.DOOR_CLICKED, SetNormalSprite);
     }
@@ -31,8 +34,10 @@ public class Mouse : MonoBehaviour {
     {
         if (MultiplatformInput.interactionType == MultiplatformInput.E_INTERACTION_TYPE.MOUSE)
         {
-            EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.DOOR_HOVER, SetHoverSprite);
+            EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.DOOR_HOVER, SetDoorHoverSprite);
             EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.DOOR_LEAVE, SetNormalSprite);
+            EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.INTERACTABLE_HOVER, SetInterEntityHoverSprite);
+            EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.INTERACTABLE_LEAVE, SetNormalSprite);
         }
         //EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.DOOR_CLICKED, SetNormalSprite);
     }
@@ -44,9 +49,13 @@ public class Mouse : MonoBehaviour {
     {
         GetComponent<Image>().sprite = mouseNormal;                
     }
-    void SetHoverSprite()
+    void SetDoorHoverSprite()
     {
         GetComponent<Image>().sprite = mouseDoorHover;
+    }
+    void SetInterEntityHoverSprite()
+    {
+        GetComponent<Image>().sprite = mouseInterEntityHover;
     }
 
     void FollowMouse()
@@ -68,7 +77,23 @@ public class Mouse : MonoBehaviour {
             }
         }
         _building = null;
-    } 
+    }
+    
+    static public void GetRoomCursorIsOn(out Room _room)
+    {
+        for (int i = 0; i < RoomManager.ref_instance.rooms.Count; ++i)
+        {
+            Room curRoom = RoomManager.ref_instance.rooms[i];
+            if (curRoom.IsMouseOnDoor())
+            {
+                _room = curRoom;
+                return;
+            }
+        }
+        _room = null;
+    }
+    
 
-       
+
+
 }

@@ -22,7 +22,7 @@ public class CharacterFactory {
     public GameObject GenerateCharacter(CharacterInfo.E_CHAR _charID)
     {
         GameObject newChar = (GameObject)MonoBehaviour.Instantiate(instance.prefab_char);
-        newChar.GetComponent<CharacterStats>().charType = _charID;
+        newChar.GetComponent<CharacterStatus>().charType = _charID;
         return newChar;
     }
 

@@ -43,7 +43,11 @@ public class LevelManager : MonoBehaviour {
     {
         characters = CharacterFactory.Instance().GenerateRandCharacters(_charNum);
         foreach (GameObject character in characters)
-            character.transform.parent = ref_charactersHolder.transform;               
+        {
+            character.transform.parent = ref_charactersHolder.transform;
+            Vector2 newPos = new Vector2(10, -67);
+            character.transform.position = newPos;
+        }               
     }
 
     private void CreateGround(int _xNum, int _yNum, Vector2 startPos)

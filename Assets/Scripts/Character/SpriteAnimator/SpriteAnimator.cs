@@ -2,20 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(CharacterStats))]
+[RequireComponent(typeof(CharacterStatus))]
 public class SpriteAnimator : MonoBehaviour {
     
     private Dictionary<CharacterInfo.E_CHAR_ACTION, Sprite[]> allAnimations = new Dictionary<CharacterInfo.E_CHAR_ACTION, Sprite[]>();
     private int curFrame = 0;
         
-    private CharacterStats playerState;
+    private CharacterStatus playerState;
     private SpriteRenderer renderer;
 
     Timer nextFrameTimer;
 
     void Awake()
     {
-        playerState = GetComponent<CharacterStats>();
+        playerState = GetComponent<CharacterStatus>();
         renderer = GetComponent<SpriteRenderer>();
     }
 

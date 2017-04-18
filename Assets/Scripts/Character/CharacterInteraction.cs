@@ -6,13 +6,18 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
     public GameObject ref_pin;
     [HideInInspector]
     public Building targetBuilding = null;
+    [HideInInspector]
+    public Room targetRoomToLeave = null;
+    [HideInInspector]
+    public InteractableEntity targetEntity = null;
+    bool isInRoom = false;
     //public BuildingEnum.E_TYPE targetBuilding = BuildingEnum.E_TYPE.LIBRARY;
 
-    private CharacterStats characterStats;
+    private CharacterStatus characterStats;
 
     void Awake()
     {
-        characterStats = GetComponent<CharacterStats>();
+        characterStats = GetComponent<CharacterStatus>();
     }
 
 
@@ -49,7 +54,9 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
     {
         SetProperLayer();
         if(targetBuilding != null && targetBuilding.IsInDoorRange(gameObject))
-            OnInTargetDoorRange();
+            OnInOuterTargetDoorRange();
+        if (targetRoomToLeave != null && targetRoomToLeave.IsInDoorRange(gameObject))
+            OnInInnerTargetDoorRange();
     }
 
 
@@ -60,6 +67,10 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
     void SetTargetBulding(Building _building)
     {
         targetBuilding = _building;        
+    }
+    void SetTargetRoom(Room _room)
+    {
+        targetRoomToLeave = _room;
     }
 
     void ChooseProperController()
@@ -79,8 +90,10 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
 
     void OnDoorClicked()
     {
-        if (LevelManager.ref_lvlManager.controlledCharacter == gameObject)
-            Mouse.GetBuildingCursorIsOn(out targetBuilding);
+        if (LevelManager.ref_lvlManager.controlledCharacter == gameObject && !isInRoom)        
+            Mouse.GetBuildingCursorIsOn(out targetBuilding);      
+        else if(LevelManager.ref_lvlManager.controlledCharacter == gameObject && isInRoom)
+             Mouse.GetRoomCursorIsOn(out targetRoomToLeave);
     }
 
     public void SetProperLayer()
@@ -88,15 +101,24 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
         GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(transform.position.y * 100f) * -1;
     }
 
-    private void OnInTargetDoorRange()
+    private void OnInOuterTargetDoorRange()
     {
         transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
         MainCamera.ref_cam.transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
+        isInRoom = true;
     }
-    
+    private void OnInInnerTargetDoorRange()
+    {       
+        transform.position = targetBuilding.doorPoint.position;
+        MainCamera.ref_cam.transform.position = targetBuilding.doorPoint.position;        
+        targetBuilding = null;
+        targetRoomToLeave = null;
+        isInRoom = false;       
+    }
 
 
-    
+
+
 
 
 

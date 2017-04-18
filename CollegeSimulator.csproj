@@ -65,26 +65,31 @@
   <ItemGroup>
     <Compile Include="Assets\Building\Building.cs" />
     <Compile Include="Assets\Building\BuildingEnum.cs" />
-    <Compile Include="Assets\EnvironmentObjects.cs" />
-    <Compile Include="Assets\Mouse.cs" />
-    <Compile Include="Assets\RoomManager.cs" />
+    <Compile Include="Assets\DialogBox.cs" />
     <Compile Include="Assets\Scripts\Camera\MainCamera.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterFactory\CharacterFactory.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterInfo.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterInteraction.cs" />
-    <Compile Include="Assets\Scripts\Character\CharacterStats.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterStatus.cs" />
     <Compile Include="Assets\Scripts\Character\Controller\AController.cs" />
     <Compile Include="Assets\Scripts\Character\Controller\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Character\Controller\SelfController.cs" />
     <Compile Include="Assets\Scripts\Character\SpriteAnimator\SpriteAnimator.cs" />
+    <Compile Include="Assets\Scripts\Character\StatsInfo.cs" />
     <Compile Include="Assets\Scripts\EventManager\EventEnumType.cs" />
     <Compile Include="Assets\Scripts\EventManager\EventManager.cs" />
     <Compile Include="Assets\Scripts\GettersToResources\GraphicsResources.cs" />
     <Compile Include="Assets\Scripts\GlobalSettings\GlobalSettings.cs" />
+    <Compile Include="Assets\Scripts\InteractableEntity.cs" />
+    <Compile Include="Assets\Scripts\LayerChangingObjects\EnvironmentObjects.cs" />
+    <Compile Include="Assets\Scripts\LayerChangingObjects\YAxisLayering.cs" />
     <Compile Include="Assets\Scripts\LevelManager\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\LibraryOwner.cs" />
+    <Compile Include="Assets\Scripts\Mouse\Mouse.cs" />
     <Compile Include="Assets\Scripts\MultiplatformInput\MultiplatformInput.cs" />
+    <Compile Include="Assets\Scripts\Room\Room.cs" />
+    <Compile Include="Assets\Scripts\Room\RoomManager.cs" />
     <Compile Include="Assets\Scripts\Timer\Timer.cs" />
-    <Compile Include="Assets\Scripts\YAxisLayering.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -6,7 +6,8 @@ public class Building : MonoBehaviour, IVertAxisLayering {
     public BuildingEnum.E_TYPE buildingType;
     public float doorRadius;
 
-    private Transform doorPoint;
+    [HideInInspector]
+    public Transform doorPoint;
     private bool wasMouseOnDoorLastFrame = false;
 
     void Awake()
@@ -60,9 +61,7 @@ public class Building : MonoBehaviour, IVertAxisLayering {
         float dist = Vector2.Distance(doorPoint.position, _char.transform.position);
         if (dist < doorRadius)
             return true;
-        return false;
-        
-             
+        return false;  
     }
     
 

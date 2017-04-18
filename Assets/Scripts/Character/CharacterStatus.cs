@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterStats : MonoBehaviour {
+public class CharacterStatus : MonoBehaviour {
 
     [HideInInspector]
     public CharacterInfo.E_CHAR_ACTION actionState;
@@ -11,8 +11,12 @@ public class CharacterStats : MonoBehaviour {
     private SelfController selfController;
     private PlayerController playerController;
 
+    StatsInfo statsInfo;
+
     void Awake()
     {
+        statsInfo = new StatsInfo();
+
         selfController = GetComponent<SelfController>();
         playerController = GetComponent<PlayerController>();
         controlType = AController.E_CHAR_CONTROLER.SELF_CONTROL;

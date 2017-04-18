@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterStats))]
+[RequireComponent(typeof(CharacterStatus))]
 public class PlayerController : AController {
            
     struct TravelInfo
@@ -29,7 +29,7 @@ public class PlayerController : AController {
 
     void Awake()
     {
-        characterStats = GetComponent<CharacterStats>();
+        characterStats = GetComponent<CharacterStatus>();
         rigid = GetComponent<Rigidbody2D>();
     }
     // Use this for initialization
@@ -59,7 +59,7 @@ public class PlayerController : AController {
     override public void HandleMovement()
     {
         //Set new targetPos if mouse/finger up
-        if (MultiplatformInput.GetInputDown())
+        if (MultiplatformInput.GetInput())
         {
             characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
             travelInfo.targetTravelPos = MultiplatformInput.GetInputPos();

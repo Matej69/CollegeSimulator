@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class AController : MonoBehaviour {
 
-    protected CharacterStats characterStats;
+    protected CharacterStatus characterStats;
 
     public enum E_CHAR_CONTROLER
     {
