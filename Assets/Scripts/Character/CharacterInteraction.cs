@@ -22,7 +22,6 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
 
 
 
-
     //Unity script
     void OnEnable()
     {
@@ -57,6 +56,7 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
             OnInOuterTargetDoorRange();
         if (targetRoomToLeave != null && targetRoomToLeave.IsInDoorRange(gameObject))
             OnInInnerTargetDoorRange();
+
     }
 
 

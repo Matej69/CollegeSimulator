@@ -23,6 +23,7 @@ public class DialogBox : MonoBehaviour {
             text = _text;    effects = _effects;    requirements = _requirements;
         }
     }
+    DialogGUIInfoPacket displayedInfoPacket;
     
 
     public enum E_VISIBILITY
@@ -47,6 +48,12 @@ public class DialogBox : MonoBehaviour {
         SetButtonListeners();
     }
 
+    void Update()
+    {
+        if (IsContentVisible())
+            FillGUIWithInfo();
+    }
+
    
 
 
@@ -58,15 +65,41 @@ public class DialogBox : MonoBehaviour {
         ref_requirements.text = "";
     }
 
-    public void FillWithInfo(DialogGUIInfoPacket _dialogPacket)
+    public void FillGUIWithInfo()
     {
         ClearGUIInfo();
-        ref_text.text = _dialogPacket.text;
-        foreach (StatAmountPair effect in _dialogPacket.effects)
+        ref_text.text = displayedInfoPacket.text;
+        foreach (StatAmountPair effect in displayedInfoPacket.effects)
             ref_effects.text += "+ " + effect.amount + " " + effect.id + "\n";
-        foreach (StatAmountPair requirements in _dialogPacket.requirements)
-            ref_requirements.text += "- " + requirements.amount + " " + requirements.id + "\n";
+        foreach (StatAmountPair requirement in displayedInfoPacket.requirements)
+            ref_requirements.text += "- " + requirement.amount + " " + requirement.id + "\n";
     }
+    public void SetGUIInfoSource(DialogGUIInfoPacket _infoPacket)
+    {
+        displayedInfoPacket = _infoPacket;
+    }
+
+
+
+
+    private bool AreRequirementsMet()
+    {
+        StatsInfo charStats = LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo;
+        bool reqFulfil = true;
+        foreach (StatAmountPair requirement in displayedInfoPacket.requirements)
+            if (requirement.amount > charStats.GetStatsValue(requirement.id))
+                reqFulfil = false;
+        return reqFulfil;
+    }
+
+    private void BuyUpgrade()
+    {
+        StatsInfo charStats = LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo;
+        foreach (StatAmountPair requirement in displayedInfoPacket.requirements)
+            charStats.ReduceStatsValue(requirement.id, requirement.amount);
+    }
+
+
 
 
 
@@ -88,7 +121,8 @@ public class DialogBox : MonoBehaviour {
         //upgrade button
         ref_upgradeButton.onClick.AddListener(delegate
         {
-            //if every requirement is met -> upgrade every controlled character effect by it's amount
+            if (AreRequirementsMet())
+                BuyUpgrade();
 
         });
 

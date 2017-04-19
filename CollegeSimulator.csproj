@@ -66,6 +66,7 @@
     <Compile Include="Assets\Building\Building.cs" />
     <Compile Include="Assets\Building\BuildingEnum.cs" />
     <Compile Include="Assets\DialogBox.cs" />
+    <Compile Include="Assets\PeopleGroup.cs" />
     <Compile Include="Assets\Scripts\Camera\MainCamera.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterFactory\CharacterFactory.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterInfo.cs" />

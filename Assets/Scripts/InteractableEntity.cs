@@ -24,19 +24,19 @@ public class InteractableEntity : MonoBehaviour
 
     void Update()
     {
-        HandleMouseToEntityInteraction();
         HandleTargetEntityAssignment();
+        HandleMouseToEntityInteraction();   
         HandleDialogGUI();        
     }
 
 
 
 
-
+    //first we must send data to display and then enable GUI
     protected void EnableDialogGUI()
     {
         DialogBox.DialogGUIInfoPacket dialogPacket = new DialogBox.DialogGUIInfoPacket(dialog_text, dialog_effects, dialog_requirements);
-        DialogBox.ref_instance.FillWithInfo(dialogPacket);
+        DialogBox.ref_instance.SetGUIInfoSource(dialogPacket);
         DialogBox.ref_instance.SetContentVisibility(DialogBox.E_VISIBILITY.VISIBLE);
     }
     
@@ -83,7 +83,7 @@ public class InteractableEntity : MonoBehaviour
         CharacterInteraction controlledChar = (LevelManager.ref_lvlManager.controlledCharacter != null) ? LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterInteraction>() : null;
         //creation of dialogBox
         if (controlledChar != null && IsCharInRange(controlledChar.gameObject) && controlledChar.targetEntity == this && !DialogBox.ref_instance.IsContentVisible())
-        {
+        {            
             EnableDialogGUI();
             controlledChar.targetEntity = null;
         }
@@ -93,7 +93,7 @@ public class InteractableEntity : MonoBehaviour
     {
         CharacterInteraction controlledChar = (LevelManager.ref_lvlManager.controlledCharacter != null) ? LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterInteraction>() : null;
         //remove target entity if click somewhere else
-        if (!IsMouseOnIteractableEntity() && MultiplatformInput.GetInputDown() && controlledChar != null)
+        if (!IsMouseOnIteractableEntity() && MultiplatformInput.GetInputDown() && controlledChar != null && controlledChar.targetEntity == this)
         {
             controlledChar.targetEntity = null;
         }

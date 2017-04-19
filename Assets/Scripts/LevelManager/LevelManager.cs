@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        CreateCharacters(10);
+        CreateCharacters(3);
         CreateGround(68, 100, new Vector2(-45,-20));
 
     }
@@ -45,8 +45,6 @@ public class LevelManager : MonoBehaviour {
         foreach (GameObject character in characters)
         {
             character.transform.parent = ref_charactersHolder.transform;
-            Vector2 newPos = new Vector2(10, -67);
-            character.transform.position = newPos;
         }               
     }
 

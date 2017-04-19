@@ -11,7 +11,9 @@ public class CharacterStatus : MonoBehaviour {
     private SelfController selfController;
     private PlayerController playerController;
 
-    StatsInfo statsInfo;
+    [HideInInspector]
+    public StatsInfo statsInfo;
+
 
     void Awake()
     {
@@ -22,6 +24,7 @@ public class CharacterStatus : MonoBehaviour {
         controlType = AController.E_CHAR_CONTROLER.SELF_CONTROL;
         SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
     }
+    
 
       
 
