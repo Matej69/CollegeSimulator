@@ -17,6 +17,8 @@ public class StatsInfo {
         INTELLIGENCE_UPGRADE_LVL,
         MONEY_UPGRADE_LVL,
         ECTS, 
+        ENERGY_MAX,
+        HUNGER_MAX,
         SIZE
     }
 
@@ -33,7 +35,7 @@ public class StatsInfo {
             else
                 statsDictionary[(E_STATS_ID)i] = 0;
     }
-    public StatsInfo(float _energy, float _hunger, float _social, float _intel, float _money, float _ects)
+    public StatsInfo(float _energy, float _hunger, float _social, float _intel, float _money, float _ects, float _maxEnergy, float _maxHunger)
     {
         statsDictionary[E_STATS_ID.ENERGY] = _energy;
         statsDictionary[E_STATS_ID.HUNGER] = _hunger;
@@ -41,6 +43,8 @@ public class StatsInfo {
         statsDictionary[E_STATS_ID.INTELLIGENCE] = _intel;
         statsDictionary[E_STATS_ID.MONEY] = _money;
         statsDictionary[E_STATS_ID.ECTS] = _ects;
+        statsDictionary[E_STATS_ID.HUNGER_MAX] = _maxHunger;
+        statsDictionary[E_STATS_ID.ENERGY_MAX] = _maxEnergy;
         //set all upgrade values to 1
         for (int i = (int)E_STATS_ID.ENERGY_UPGRADE_LVL; i <= (int)E_STATS_ID.MONEY_UPGRADE_LVL; ++i)
             statsDictionary[(E_STATS_ID)i] = 1;

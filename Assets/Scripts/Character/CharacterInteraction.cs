@@ -37,8 +37,11 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
     void OnMouseDown()
     {
         //if click => if not selected -> select, if selected -> deselect
-        LevelManager.ref_lvlManager.controlledCharacter = (LevelManager.ref_lvlManager.controlledCharacter != gameObject) ? gameObject : null;        
-        EventManager.TriggerEvent(EventEnumType.E_EVENT_ID.CHAR_CLICKED_ON);
+        if (GetComponent<CharacterStatus>().canBeControlled)
+        {
+            LevelManager.ref_lvlManager.controlledCharacter = (LevelManager.ref_lvlManager.controlledCharacter != gameObject) ? gameObject : null;
+            EventManager.TriggerEvent(EventEnumType.E_EVENT_ID.CHAR_CLICKED_ON);
+        }
     }
     void OnMouseEnter()
     {
@@ -75,7 +78,7 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
 
     void ChooseProperController()
     {
-        if (LevelManager.ref_lvlManager.controlledCharacter == gameObject)
+        if (LevelManager.ref_lvlManager.controlledCharacter == gameObject && GetComponent<CharacterStatus>().canBeControlled)
         {
             characterStats.SetControlType(AController.E_CHAR_CONTROLER.PLAYER_CONTROL);
             ref_pin.SetActive(true);
@@ -105,12 +108,14 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
     {
         transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
         MainCamera.ref_cam.transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
+        MainCamera.ref_cam.SetCamPlacement(MainCamera.E_CAM_PLACEMENT.ROOM);
         isInRoom = true;
     }
     private void OnInInnerTargetDoorRange()
     {       
         transform.position = targetBuilding.doorPoint.position;
-        MainCamera.ref_cam.transform.position = targetBuilding.doorPoint.position;        
+        MainCamera.ref_cam.transform.position = targetBuilding.doorPoint.position;
+        MainCamera.ref_cam.SetCamPlacement(MainCamera.E_CAM_PLACEMENT.WORLD);  
         targetBuilding = null;
         targetRoomToLeave = null;
         isInRoom = false;       

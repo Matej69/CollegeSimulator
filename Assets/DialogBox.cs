@@ -47,11 +47,14 @@ public class DialogBox : MonoBehaviour {
         ref_instance = this;
         SetButtonListeners();
     }
+    
 
     void Update()
     {
         if (IsContentVisible())
+        {
             FillGUIWithInfo();
+        }
     }
 
    
@@ -73,6 +76,7 @@ public class DialogBox : MonoBehaviour {
             ref_effects.text += "+ " + effect.amount + " " + effect.id + "\n";
         foreach (StatAmountPair requirement in displayedInfoPacket.requirements)
             ref_requirements.text += "- " + requirement.amount + " " + requirement.id + "\n";
+        UpdateUpgradeButtonInteractivity();
     }
     public void SetGUIInfoSource(DialogGUIInfoPacket _infoPacket)
     {
@@ -97,6 +101,8 @@ public class DialogBox : MonoBehaviour {
         StatsInfo charStats = LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo;
         foreach (StatAmountPair requirement in displayedInfoPacket.requirements)
             charStats.ReduceStatsValue(requirement.id, requirement.amount);
+        foreach (StatAmountPair effect in displayedInfoPacket.effects)
+            charStats.AddStatsValue(effect.id, effect.amount);
     }
 
 
@@ -116,16 +122,22 @@ public class DialogBox : MonoBehaviour {
             ref_content.SetActive(false);
     }
 
+    void UpdateUpgradeButtonInteractivity()
+    {
+        if (AreRequirementsMet())
+            ref_upgradeButton.interactable = true;
+        else
+            ref_upgradeButton.interactable = false;
+    }
+
     private void SetButtonListeners()
     {
         //upgrade button
         ref_upgradeButton.onClick.AddListener(delegate
-        {
+        {            
             if (AreRequirementsMet())
-                BuyUpgrade();
-
+                BuyUpgrade();    
         });
-
         //exit button
         ref_exitButton.onClick.AddListener(delegate
         {

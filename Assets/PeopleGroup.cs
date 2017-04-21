@@ -7,7 +7,7 @@ public class PeopleGroup : MonoBehaviour {
     private float distance = 0.55f;
 
 	// Use this for initialization
-	void Start () {
+	void Start () {  
         charPositions = new Vector2[]
         {
             new Vector2(transform.position.x - distance + 0.1f, transform.position.y - distance),
@@ -29,9 +29,11 @@ public class PeopleGroup : MonoBehaviour {
             CharacterInfo.E_CHAR randCharID = (CharacterInfo.E_CHAR)Random.Range(0, (int)CharacterInfo.E_CHAR.SIZE);
             GameObject newChar = CharacterFactory.Instance().GenerateCharacter(randCharID);
             newChar.GetComponent<CharacterStatus>().SetActionState(CharacterInfo.E_CHAR_ACTION.IDLE);
+            newChar.GetComponent<CharacterStatus>().canBeControlled = false;
             newChar.GetComponent<AController>().Rotate((AController.E_SIDE)Random.Range(0,2));
             newChar.transform.SetParent(transform);
             newChar.transform.position = charPositions[posID];
+            
         }
         
     }

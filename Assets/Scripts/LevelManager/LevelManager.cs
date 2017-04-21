@@ -21,6 +21,9 @@ public class LevelManager : MonoBehaviour {
     [HideInInspector]
     public GameObject controlledCharacter;
 
+    [HideInInspector]
+    public BoxCollider2D levelBounds;
+
     void Awake()
     {
         ref_lvlManager = this;
@@ -28,6 +31,7 @@ public class LevelManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        levelBounds = GetComponent<BoxCollider2D>();
         CreateCharacters(3);
         CreateGround(68, 100, new Vector2(-45,-20));
 
@@ -35,8 +39,7 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+    }
 
     //******CREATE STUFF******
     private void CreateCharacters(int _charNum)
@@ -45,6 +48,7 @@ public class LevelManager : MonoBehaviour {
         foreach (GameObject character in characters)
         {
             character.transform.parent = ref_charactersHolder.transform;
+            character.transform.position = ref_charactersHolder.transform.position;
         }               
     }
 
@@ -102,5 +106,17 @@ public class LevelManager : MonoBehaviour {
     {
         return (controlledCharacter != null) ? true : false;
     }
+
+    //******************BOUNDS********************
+    public bool IsPosOutOfBounds(Vector2 _pos)
+    {
+        Vector2 halfSize = levelBounds.size/2;
+        Vector2 center = levelBounds.bounds.center;
+        if (_pos.x < center.x + halfSize.x && _pos.x > center.x - halfSize.x && _pos.y > center.y - halfSize.y && _pos.y < center.y + halfSize.y)
+            return true;
+        else
+            return false;
+    }
+
 
 }

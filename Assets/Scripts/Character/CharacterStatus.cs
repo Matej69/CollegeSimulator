@@ -14,10 +14,13 @@ public class CharacterStatus : MonoBehaviour {
     [HideInInspector]
     public StatsInfo statsInfo;
 
+    [HideInInspector]
+    public bool canBeControlled = true;
+
 
     void Awake()
     {
-        statsInfo = new StatsInfo();
+        statsInfo = new StatsInfo(15, 2, 0, 0, 10 , 0, 20, 20);
 
         selfController = GetComponent<SelfController>();
         playerController = GetComponent<PlayerController>();
@@ -36,6 +39,6 @@ public class CharacterStatus : MonoBehaviour {
     {
         controlType = _control;
     }
-
+    
 
 }
