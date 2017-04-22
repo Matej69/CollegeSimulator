@@ -7,7 +7,7 @@ public class BuildingEnum : MonoBehaviour {
     {
         HOUSE,
         BAR,
-        STORE,
+        WORKSTORE,
         COLLEGE,
         LIBRARY,
         NONE

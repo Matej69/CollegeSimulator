@@ -68,6 +68,7 @@
     <Compile Include="Assets\DebugGUI.cs" />
     <Compile Include="Assets\DialogBox.cs" />
     <Compile Include="Assets\PeopleGroup.cs" />
+    <Compile Include="Assets\PlaceChangeBlackScreen.cs" />
     <Compile Include="Assets\Scripts\Camera\MainCamera.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterFactory\CharacterFactory.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterInfo.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Assets\Scripts\LayerChangingObjects\EnvironmentObjects.cs" />
     <Compile Include="Assets\Scripts\LayerChangingObjects\YAxisLayering.cs" />
     <Compile Include="Assets\Scripts\LevelManager\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\LibraryOwner.cs" />
     <Compile Include="Assets\Scripts\Mouse\Mouse.cs" />
     <Compile Include="Assets\Scripts\MultiplatformInput\MultiplatformInput.cs" />
     <Compile Include="Assets\Scripts\Room\Room.cs" />

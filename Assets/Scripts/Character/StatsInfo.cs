@@ -73,4 +73,27 @@ public class StatsInfo {
     }
 
 
+    static public string GetEnumString(E_STATS_ID _statID)
+    {
+        switch(_statID)
+        {
+            case E_STATS_ID.ENERGY:                     return "ENERGY"; break;
+            case E_STATS_ID.HUNGER:                     return "HUNGER"; break;
+            case E_STATS_ID.SOCIAL:                     return "SOCIAL"; break;
+            case E_STATS_ID.INTELLIGENCE:               return "INTELLIGENCE"; break;
+            case E_STATS_ID.MONEY:                      return "MONEY"; break;
+            case E_STATS_ID.ENERGY_UPGRADE_LVL:         return "ENERGY LVL"; break;
+            case E_STATS_ID.HUNGER_UPGRADE_LVL:         return "HUNGER LVL"; break;
+            case E_STATS_ID.SOCIAL_UPGRADE_LVL:         return "SOCIAL LVL"; break;
+            case E_STATS_ID.INTELLIGENCE_UPGRADE_LVL:   return "INTELLIGENCE LVL";  break;
+            case E_STATS_ID.MONEY_UPGRADE_LVL:          return "MONEY LVL"; break;
+            case E_STATS_ID.ECTS :                      return "ECTS"; break;
+            case E_STATS_ID.ENERGY_MAX:                 return "MAX ENERGY"; break;
+            case E_STATS_ID.HUNGER_MAX:                 return "MAX HUNGER"; break;
+            default: return " -- DEAFULT ENUM -- "; break;
+        }
+
+    }
+
+
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 26c9d6fa552c79040ba31d038ec5b49d
-timeCreated: 1492382797
+timeCreated: 1492804885
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -76,6 +76,15 @@ TextureImporter:
     21300138: EntitiesSheet_25
     21300140: EntitiesSheet_26
     21300142: EntitiesSheet_27
+    21300144: EntitiesSheet_28
+    21300146: EntitiesSheet_29
+    21300148: EntitiesSheet_30
+    21300150: EntitiesSheet_31
+    21300152: EntitiesSheet_32
+    21300154: EntitiesSheet_33
+    21300156: EntitiesSheet_34
+    21300158: EntitiesSheet_35
+    21300160: EntitiesSheet_36
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1055,6 +1064,123 @@ TextureImporter:
         y: 1577
         width: 15
         height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_28
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 714
+        width: 32
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_29
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 714
+        width: 32
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_30
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 535
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_31
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 532
+        width: 30
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_32
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 562
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_33
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 461
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_34
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 722
+        width: 14
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_35
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 687
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: EntitiesSheet_36
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 689
+        width: 52
+        height: 55
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

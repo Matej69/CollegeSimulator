@@ -106,13 +106,15 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
 
     private void OnInOuterTargetDoorRange()
     {
+        PlaceChangeBlackScreen.TriggerBlackScreen();
         transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
         MainCamera.ref_cam.transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
         MainCamera.ref_cam.SetCamPlacement(MainCamera.E_CAM_PLACEMENT.ROOM);
         isInRoom = true;
     }
     private void OnInInnerTargetDoorRange()
-    {       
+    {
+        PlaceChangeBlackScreen.TriggerBlackScreen();
         transform.position = targetBuilding.doorPoint.position;
         MainCamera.ref_cam.transform.position = targetBuilding.doorPoint.position;
         MainCamera.ref_cam.SetCamPlacement(MainCamera.E_CAM_PLACEMENT.WORLD);  

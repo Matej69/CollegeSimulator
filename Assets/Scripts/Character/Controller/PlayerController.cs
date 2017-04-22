@@ -59,16 +59,19 @@ public class PlayerController : AController {
     override public void HandleMovement()
     {
         //Set new targetPos if mouse/finger up
-        if (MultiplatformInput.GetInput())
+        if (!DialogBox.ref_instance.IsContentVisible())
         {
-            characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
-            travelInfo.targetTravelPos = MultiplatformInput.GetInputPos();
-            travelInfo.travelDir = (travelInfo.targetTravelPos - (Vector2)transform.position).normalized;
-            //handle rotation
-            if (MultiplatformInput.GetInputPos().x < transform.position.x)
-                Rotate(E_SIDE.LEFT);
-            else if (MultiplatformInput.GetInputPos().x > transform.position.x)
-                Rotate(E_SIDE.RIGHT);            
+            if (MultiplatformInput.GetInput())
+            {
+                characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
+                travelInfo.targetTravelPos = MultiplatformInput.GetInputPos();
+                travelInfo.travelDir = (travelInfo.targetTravelPos - (Vector2)transform.position).normalized;
+                //handle rotation
+                if (MultiplatformInput.GetInputPos().x < transform.position.x)
+                    Rotate(E_SIDE.LEFT);
+                else if (MultiplatformInput.GetInputPos().x > transform.position.x)
+                    Rotate(E_SIDE.RIGHT);
+            }
         }
         //travel to that pos
         //rigid.velocity = (travelInfo.travelDir * Time.deltaTime * walkSpeed);

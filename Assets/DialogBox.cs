@@ -73,9 +73,9 @@ public class DialogBox : MonoBehaviour {
         ClearGUIInfo();
         ref_text.text = displayedInfoPacket.text;
         foreach (StatAmountPair effect in displayedInfoPacket.effects)
-            ref_effects.text += "+ " + effect.amount + " " + effect.id + "\n";
+            ref_effects.text += "+ " + effect.amount + " " + StatsInfo.GetEnumString(effect.id) + "\n";
         foreach (StatAmountPair requirement in displayedInfoPacket.requirements)
-            ref_requirements.text += "- " + requirement.amount + " " + requirement.id + "\n";
+            ref_requirements.text += "- " + requirement.amount + " " + StatsInfo.GetEnumString(requirement.id) + "\n";
         UpdateUpgradeButtonInteractivity();
     }
     public void SetGUIInfoSource(DialogGUIInfoPacket _infoPacket)
