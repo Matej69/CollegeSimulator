@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DialogBox : MonoBehaviour {
 
     [System.Serializable]
-    public struct StatAmountPair
+    public class StatAmountPair
     {
         public StatsInfo.E_STATS_ID id;
         public float amount;
@@ -41,6 +41,8 @@ public class DialogBox : MonoBehaviour {
     public Button ref_exitButton;
 
     static public DialogBox ref_instance;
+    [HideInInspector]
+    public InteractableEntity parent;
 
     void Awake()
     {
@@ -52,9 +54,7 @@ public class DialogBox : MonoBehaviour {
     void Update()
     {
         if (IsContentVisible())
-        {
             FillGUIWithInfo();
-        }
     }
 
    
@@ -81,6 +81,49 @@ public class DialogBox : MonoBehaviour {
     public void SetGUIInfoSource(DialogGUIInfoPacket _infoPacket)
     {
         displayedInfoPacket = _infoPacket;
+        for (int i = 0; i < displayedInfoPacket.effects.Count; ++i)
+        {
+            StatAmountPair effect = displayedInfoPacket.effects[i];
+            //if effect is one of normal ones, get it's value according to lvl
+            if (StatsInfo.IsNormalStats(effect.id))
+                effect.amount = GetNormalStatAmountToBuy(effect.id);
+        }
+        for (int i = 0; i < displayedInfoPacket.requirements.Count; ++i)
+        {
+            StatAmountPair requirement = displayedInfoPacket.requirements[i];
+            //if requirement if one of upgrades, get it's value according to lvl of that upgrade  
+            if (StatsInfo.IsUpgradeStats(displayedInfoPacket.effects[0].id))
+                requirement.amount = GetUpgradeStatAmountToBuy(displayedInfoPacket.effects[0].id);
+            //Debug.Log(requirement.amount + " = " + displayedInfoPacket.requirements[i].amount);
+        }
+    }
+
+
+    public float GetNormalStatAmountToBuy(StatsInfo.E_STATS_ID _id)
+    {
+        StatsInfo statsInfo = LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo;
+        switch (_id)
+        {
+            case StatsInfo.E_STATS_ID.ENERGY        :   return  statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.ENERGY_UPGRADE_LVL);       break;
+            case StatsInfo.E_STATS_ID.INTELLIGENCE  :   return  statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.INTELLIGENCE_UPGRADE_LVL); break;
+            case StatsInfo.E_STATS_ID.HUNGER        :   return  statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.HUNGER_UPGRADE_LVL);       break;
+            case StatsInfo.E_STATS_ID.MONEY         :   return  statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.MONEY_UPGRADE_LVL);        break;
+            case StatsInfo.E_STATS_ID.SOCIAL        :   return  statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.SOCIAL_UPGRADE_LVL);       break;
+            default :   Debug.LogError("COULD NOT RETURN STATS ACCORDING TO LVL WITH ID = " + _id); return 0.0f;
+        }
+    }
+    public float GetUpgradeStatAmountToBuy(StatsInfo.E_STATS_ID _id)
+    {
+        StatsInfo statsInfo = LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo;
+        switch (_id)
+        {
+            case StatsInfo.E_STATS_ID.ENERGY_UPGRADE_LVL        : return statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.ENERGY_UPGRADE_LVL) * 2 + 5; break;
+            case StatsInfo.E_STATS_ID.INTELLIGENCE_UPGRADE_LVL  : return statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.INTELLIGENCE_UPGRADE_LVL) * 2 + 5; break;
+            case StatsInfo.E_STATS_ID.HUNGER_UPGRADE_LVL        : return statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.HUNGER_UPGRADE_LVL) * 2 + 5; break;
+            case StatsInfo.E_STATS_ID.MONEY_UPGRADE_LVL         : return statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.MONEY_UPGRADE_LVL) * 2 + 5; break;
+            case StatsInfo.E_STATS_ID.SOCIAL_UPGRADE_LVL        : return statsInfo.GetStatsValue(StatsInfo.E_STATS_ID.SOCIAL_UPGRADE_LVL) * 2 + 5; break;
+            default: Debug.LogError("COULD NOT RETURN STATS ACCORDING TO LVL WITH ID = " + _id); return 0.0f;
+        }
     }
 
 
@@ -96,13 +139,15 @@ public class DialogBox : MonoBehaviour {
         return reqFulfil;
     }
 
-    private void BuyUpgrade()
+    private void OnBuy()
     {
         StatsInfo charStats = LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo;
         foreach (StatAmountPair requirement in displayedInfoPacket.requirements)
             charStats.ReduceStatsValue(requirement.id, requirement.amount);
-        foreach (StatAmountPair effect in displayedInfoPacket.effects)
-            charStats.AddStatsValue(effect.id, effect.amount);
+        foreach (StatAmountPair effect in displayedInfoPacket.effects)        
+            charStats.AddStatsValue(effect.id, effect.amount);           
+        //reset info so it shows ne info
+        parent.RefreshInfo();
     }
 
 
@@ -136,7 +181,7 @@ public class DialogBox : MonoBehaviour {
         ref_upgradeButton.onClick.AddListener(delegate
         {            
             if (AreRequirementsMet())
-                BuyUpgrade();    
+                OnBuy();    
         });
         //exit button
         ref_exitButton.onClick.AddListener(delegate

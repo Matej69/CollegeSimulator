@@ -60,11 +60,18 @@ public class StatsInfo {
     public void AddStatsValue(E_STATS_ID _id, float _value)
     {
         statsDictionary[_id] = statsDictionary[_id] + _value;
+        if (_id == E_STATS_ID.HUNGER && statsDictionary[_id] > statsDictionary[E_STATS_ID.HUNGER_MAX])
+            statsDictionary[_id] = statsDictionary[E_STATS_ID.HUNGER_MAX];
+        if (_id == E_STATS_ID.ENERGY && statsDictionary[_id] > statsDictionary[E_STATS_ID.ENERGY_MAX])
+            statsDictionary[_id] = statsDictionary[E_STATS_ID.ENERGY_MAX];
+
+
     }
 
     public void ReduceStatsValue(E_STATS_ID _id, float _value)
     {
-        statsDictionary[_id] = statsDictionary[_id] - _value;
+        float targetValue = statsDictionary[_id] - _value;
+        statsDictionary[_id] = (targetValue < 0) ? 0 : targetValue;
     }
 
     public void SetStatsValue(E_STATS_ID _id, float _value)
@@ -82,18 +89,34 @@ public class StatsInfo {
             case E_STATS_ID.SOCIAL:                     return "SOCIAL"; break;
             case E_STATS_ID.INTELLIGENCE:               return "INTELLIGENCE"; break;
             case E_STATS_ID.MONEY:                      return "MONEY"; break;
-            case E_STATS_ID.ENERGY_UPGRADE_LVL:         return "ENERGY LVL"; break;
-            case E_STATS_ID.HUNGER_UPGRADE_LVL:         return "HUNGER LVL"; break;
-            case E_STATS_ID.SOCIAL_UPGRADE_LVL:         return "SOCIAL LVL"; break;
-            case E_STATS_ID.INTELLIGENCE_UPGRADE_LVL:   return "INTELLIGENCE LVL";  break;
-            case E_STATS_ID.MONEY_UPGRADE_LVL:          return "MONEY LVL"; break;
+            case E_STATS_ID.ENERGY_UPGRADE_LVL:         return "ENERGY UPGRADE LVL"; break;
+            case E_STATS_ID.HUNGER_UPGRADE_LVL:         return "HUNGER UPGRADE LVL"; break;
+            case E_STATS_ID.SOCIAL_UPGRADE_LVL:         return "SOCIAL UPGRADE LVL"; break;
+            case E_STATS_ID.INTELLIGENCE_UPGRADE_LVL:   return "INTELLIGENCE UPGRADE LVL";  break;
+            case E_STATS_ID.MONEY_UPGRADE_LVL:          return "MONEY UPGRADE LVL"; break;
             case E_STATS_ID.ECTS :                      return "ECTS"; break;
             case E_STATS_ID.ENERGY_MAX:                 return "MAX ENERGY"; break;
             case E_STATS_ID.HUNGER_MAX:                 return "MAX HUNGER"; break;
             default: return " -- DEAFULT ENUM -- "; break;
         }
-
     }
+
+
+    static public bool IsNormalStats(E_STATS_ID _id)
+    {
+        if (_id == E_STATS_ID.ENERGY || _id == E_STATS_ID.HUNGER || _id == E_STATS_ID.INTELLIGENCE || _id == E_STATS_ID.MONEY || _id == E_STATS_ID.SOCIAL)
+            return true;
+        return false;
+    }
+    static public bool IsUpgradeStats(E_STATS_ID _id)
+    {
+        if (_id == E_STATS_ID.ENERGY_UPGRADE_LVL || _id == E_STATS_ID.HUNGER_UPGRADE_LVL || _id == E_STATS_ID.INTELLIGENCE_UPGRADE_LVL || 
+            _id == E_STATS_ID.MONEY_UPGRADE_LVL || _id == E_STATS_ID.SOCIAL_UPGRADE_LVL)
+            return true;
+        return false;
+    }
+
+
 
 
 }

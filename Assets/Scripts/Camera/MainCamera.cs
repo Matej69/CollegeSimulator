@@ -74,7 +74,6 @@ public class MainCamera : MonoBehaviour {
             if (camPos.x + halfCamSize.x > center.x + halfSize.x)
             {
                 _targetPos.x = center.x + halfSize.x - halfCamSize.x;
-                Debug.Log(_targetPos.x + " = " + (center.x + halfSize.x - halfCamSize.x));
             }
             if (camPos.y + halfCamSize.y > center.y + halfSize.y)
                 _targetPos.y = center.y + halfSize.y - halfCamSize.y;

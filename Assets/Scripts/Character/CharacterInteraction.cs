@@ -25,15 +25,17 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
     //Unity script
     void OnEnable()
     {
-        EventManager.Subscribe(EventEnumType.E_EVENT_ID.CHAR_CLICKED_ON, ChooseProperController);
+        EventManager.Subscribe(EventEnumType.E_EVENT_ID.CHAR_CLICKED_ON, OnClickedOn);
         EventManager.Subscribe(EventEnumType.E_EVENT_ID.DOOR_CLICKED, OnDoorClicked);        
     }
     void OnDisable()
     {
-        EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.CHAR_CLICKED_ON, ChooseProperController);
+        EventManager.Unsubscribe(EventEnumType.E_EVENT_ID.CHAR_CLICKED_ON, OnClickedOn);
         EventManager.Subscribe(EventEnumType.E_EVENT_ID.DOOR_CLICKED, OnDoorClicked);
     }
     
+    //CAN NOT TAKE CHARACTER CONTROLL IN THIS BUILD
+    /*
     void OnMouseDown()
     {
         //if click => if not selected -> select, if selected -> deselect
@@ -43,14 +45,7 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
             EventManager.TriggerEvent(EventEnumType.E_EVENT_ID.CHAR_CLICKED_ON);
         }
     }
-    void OnMouseEnter()
-    {
-
-    }
-    void OnMouseExit()
-    {
-
-    }
+    */
     
     void Update()
     {
@@ -76,8 +71,11 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
         targetRoomToLeave = _room;
     }
 
-    void ChooseProperController()
+    //IF YOU WANT TO TAKE CONTROLL OVER CLICK, FOR CURRENT BUILD OF THE GAME IT IS NOT NECESSARY
+    void OnClickedOn()
     {
+        
+        /*
         if (LevelManager.ref_lvlManager.controlledCharacter == gameObject && GetComponent<CharacterStatus>().canBeControlled)
         {
             characterStats.SetControlType(AController.E_CHAR_CONTROLER.PLAYER_CONTROL);
@@ -86,9 +84,10 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
         else
         {
             characterStats.SetControlType(AController.E_CHAR_CONTROLER.SELF_CONTROL);
-            characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.IDLE);
+            characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
             ref_pin.SetActive(false);
         }
+        */
     }
 
     void OnDoorClicked()
@@ -117,7 +116,9 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
         PlaceChangeBlackScreen.TriggerBlackScreen();
         transform.position = targetBuilding.doorPoint.position;
         MainCamera.ref_cam.transform.position = targetBuilding.doorPoint.position;
-        MainCamera.ref_cam.SetCamPlacement(MainCamera.E_CAM_PLACEMENT.WORLD);  
+        MainCamera.ref_cam.SetCamPlacement(MainCamera.E_CAM_PLACEMENT.WORLD);
+        if(targetRoomToLeave.roomID == BuildingEnum.E_TYPE.HOUSE)
+            LevelManager.ref_lvlManager.OnNewDay();
         targetBuilding = null;
         targetRoomToLeave = null;
         isInRoom = false;       

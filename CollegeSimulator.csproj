@@ -67,6 +67,9 @@
     <Compile Include="Assets\Building\BuildingEnum.cs" />
     <Compile Include="Assets\DebugGUI.cs" />
     <Compile Include="Assets\DialogBox.cs" />
+    <Compile Include="Assets\EndGame.cs" />
+    <Compile Include="Assets\NewDayText.cs" />
+    <Compile Include="Assets\Pathways.cs" />
     <Compile Include="Assets\PeopleGroup.cs" />
     <Compile Include="Assets\PlaceChangeBlackScreen.cs" />
     <Compile Include="Assets\Scripts\Camera\MainCamera.cs" />
@@ -91,6 +94,8 @@
     <Compile Include="Assets\Scripts\MultiplatformInput\MultiplatformInput.cs" />
     <Compile Include="Assets\Scripts\Room\Room.cs" />
     <Compile Include="Assets\Scripts\Room\RoomManager.cs" />
+    <Compile Include="Assets\Scripts\Textbox\Textbox.cs" />
+    <Compile Include="Assets\Scripts\Textbox\TextboxMessageInfo.cs" />
     <Compile Include="Assets\Scripts\Timer\Timer.cs" />
     <Compile Include="Assets\VisibleStatsGUI.cs" />
   </ItemGroup>

@@ -4,8 +4,20 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour {
 
+    /*
+    public enum E_LEVEL_STATE
+    {
+        PLAYING,
+        TRAVELING
+    }
+    E_LEVEL_STATE levelState = E_LEVEL_STATE.PLAYING;
+    */
+
     static public LevelManager ref_lvlManager;
     static int MAX_CHAR = 200;
+    static int MAX_DAYS = 100;
+    public static int MAX_ECTS = 180;
+    static int curDay = 0;
 
     public GameObject ref_groundHolder;
     public GameObject ref_charactersHolder;
@@ -32,13 +44,16 @@ public class LevelManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         levelBounds = GetComponent<BoxCollider2D>();
-        CreateCharacters(3);
+        CreateCharacters(45);
+        CreateControlledCharacter();
         CreateGround(68, 100, new Vector2(-45,-20));
+
 
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
     }
 
     //******CREATE STUFF******
@@ -50,6 +65,17 @@ public class LevelManager : MonoBehaviour {
             character.transform.parent = ref_charactersHolder.transform;
             character.transform.position = ref_charactersHolder.transform.position;
         }               
+    }
+
+    private void CreateControlledCharacter()
+    {
+        GameObject character = CharacterFactory.Instance().GenerateCharacter(CharacterInfo.E_CHAR.BOY3);
+        character.transform.parent = ref_charactersHolder.transform;
+        character.transform.position = ref_charactersHolder.transform.position;
+        character.GetComponent<CharacterInteraction>().ref_pin.SetActive(true);
+        character.GetComponent<CharacterStatus>().SetControlType(AController.E_CHAR_CONTROLER.PLAYER_CONTROL);
+        character.GetComponent<CharacterStatus>().SetActionState(CharacterInfo.E_CHAR_ACTION.IDLE);
+        LevelManager.ref_lvlManager.controlledCharacter = character;
     }
 
     private void CreateGround(int _xNum, int _yNum, Vector2 startPos)
@@ -116,6 +142,25 @@ public class LevelManager : MonoBehaviour {
             return true;
         else
             return false;
+    }
+
+    //*****************On new day*****************
+    public void OnNewDay()
+    {
+        curDay++;
+        if (curDay >= LevelManager.MAX_DAYS)
+            OnGameEnd();
+        else
+        {
+            NewDayText.instance.EnableText((LevelManager.MAX_DAYS - curDay) + " DAYS LEFT ");
+            LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo.AddStatsValue(StatsInfo.E_STATS_ID.ENERGY_MAX, 1);
+            LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo.AddStatsValue(StatsInfo.E_STATS_ID.HUNGER_MAX, 1);
+        }
+    }
+
+    private void OnGameEnd()
+    {
+        EndGame.instance.TriggerEndGame(controlledCharacter.GetComponent<CharacterStatus>().statsInfo);
     }
 
 

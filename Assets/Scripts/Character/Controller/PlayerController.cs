@@ -13,8 +13,14 @@ public class PlayerController : AController {
 
     Rigidbody2D rigid;
 
+    public enum E_MOVEMENT_STATE
+    {
+        WALK,
+        RUN
+    }
     private float walkSpeed = 3 * 50;
     private float runSpeed = 10 * 50;
+    private float movementSpeed = 3 * 50;
 
     //Unity script
     void OnEnable()
@@ -41,38 +47,41 @@ public class PlayerController : AController {
 	void Update ()
     {
         if (characterStats.controlType == E_CHAR_CONTROLER.PLAYER_CONTROL)
-            HandleMovement();        
+            UpdateMovementAttributes();
     }
 
     void FixedUpdate()
     {
-        //travel to target pos
-        if (characterStats.controlType == E_CHAR_CONTROLER.PLAYER_CONTROL)
-            rigid.velocity = (travelInfo.travelDir * Time.deltaTime * walkSpeed);
+        HandleMovement();
     }
-
-
-
 
 
 
     override public void HandleMovement()
     {
+        //travel to target pos if GUI is not visible
+        if (characterStats.controlType == E_CHAR_CONTROLER.PLAYER_CONTROL && !DialogBox.ref_instance.IsContentVisible())
+            rigid.velocity = (travelInfo.travelDir * Time.deltaTime * movementSpeed);
+        //if GUI is visible set traveling velocity to 0
+        if (characterStats.controlType == E_CHAR_CONTROLER.PLAYER_CONTROL && DialogBox.ref_instance.IsContentVisible())
+            rigid.velocity = Vector2.zero;
+    }
+
+
+    public void UpdateMovementAttributes()
+    {
         //Set new targetPos if mouse/finger up
-        if (!DialogBox.ref_instance.IsContentVisible())
+        if (MultiplatformInput.GetInput() && !DialogBox.ref_instance.IsContentVisible())
         {
-            if (MultiplatformInput.GetInput())
-            {
-                characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
-                travelInfo.targetTravelPos = MultiplatformInput.GetInputPos();
-                travelInfo.travelDir = (travelInfo.targetTravelPos - (Vector2)transform.position).normalized;
-                //handle rotation
-                if (MultiplatformInput.GetInputPos().x < transform.position.x)
-                    Rotate(E_SIDE.LEFT);
-                else if (MultiplatformInput.GetInputPos().x > transform.position.x)
-                    Rotate(E_SIDE.RIGHT);
-            }
-        }
+            characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
+            travelInfo.targetTravelPos = MultiplatformInput.GetInputPos();
+            travelInfo.travelDir = (travelInfo.targetTravelPos - (Vector2)transform.position).normalized;
+            //handle rotation
+            if (MultiplatformInput.GetInputPos().x < transform.position.x)
+                Rotate(E_SIDE.LEFT);
+            else if (MultiplatformInput.GetInputPos().x > transform.position.x)
+                Rotate(E_SIDE.RIGHT);
+        }    
         //travel to that pos
         //rigid.velocity = (travelInfo.travelDir * Time.deltaTime * walkSpeed);
         //transform.Translate(travelInfo.travelDir * Time.deltaTime * walkSpeed);
@@ -83,6 +92,16 @@ public class PlayerController : AController {
             transform.position = travelInfo.targetTravelPos;
             characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.IDLE);
         }
+    }
+
+    public void SetMovementSpeed(E_MOVEMENT_STATE _moveState)
+    {
+        if (_moveState == E_MOVEMENT_STATE.WALK)
+            movementSpeed = walkSpeed;
+        else if (_moveState == E_MOVEMENT_STATE.RUN)
+            movementSpeed = runSpeed;
+
+
     }
 
 

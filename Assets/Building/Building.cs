@@ -42,7 +42,9 @@ public class Building : MonoBehaviour, IVertAxisLayering {
             wasMouseOnDoorLastFrame = true;
             EventManager.TriggerEvent(EventEnumType.E_EVENT_ID.DOOR_HOVER);
             if (MultiplatformInput.GetInputDown())
+            {                
                 EventManager.TriggerEvent(EventEnumType.E_EVENT_ID.DOOR_CLICKED);
+            }
         }
         else
         {

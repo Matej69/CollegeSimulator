@@ -38,6 +38,12 @@ public class InteractableEntity : MonoBehaviour
         DialogBox.DialogGUIInfoPacket dialogPacket = new DialogBox.DialogGUIInfoPacket(dialog_text, dialog_effects, dialog_requirements);
         DialogBox.ref_instance.SetGUIInfoSource(dialogPacket);
         DialogBox.ref_instance.SetContentVisibility(DialogBox.E_VISIBILITY.VISIBLE);
+        DialogBox.ref_instance.parent = this;
+    }
+    public void RefreshInfo()
+    {
+        DialogBox.DialogGUIInfoPacket dialogPacket = new DialogBox.DialogGUIInfoPacket(dialog_text, dialog_effects, dialog_requirements);
+        DialogBox.ref_instance.SetGUIInfoSource(dialogPacket);
     }
     
 
