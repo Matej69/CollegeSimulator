@@ -22,7 +22,7 @@ public class CharacterStatus : MonoBehaviour {
 
     void Awake()
     {
-        statsInfo = new StatsInfo(40, 20, 0, 0, 5 , 0, 40, 20);
+        statsInfo = new StatsInfo(40, 30, 0, 0, 5 , 0, 40, 30);
 
         selfController = GetComponent<SelfController>();
         playerController = GetComponent<PlayerController>();

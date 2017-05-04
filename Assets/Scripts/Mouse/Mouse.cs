@@ -8,14 +8,10 @@ public class Mouse : MonoBehaviour {
     public Sprite mouseNormal;
     public Sprite mouseDoorHover;
     public Sprite mouseInterEntityHover;
-
-
-    void Start()
-    {
-        Cursor.visible = false;
-    }
+    
     void Update()
     {
+        Cursor.visible = false;
         FollowMouse();
     }
     //Unity script

@@ -110,6 +110,7 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
         MainCamera.ref_cam.transform.position = RoomManager.ref_instance.GetDoorPoint(targetBuilding.buildingType);
         MainCamera.ref_cam.SetCamPlacement(MainCamera.E_CAM_PLACEMENT.ROOM);
         isInRoom = true;
+        AudioManager.instance.CreateSoundObject(AudioManager.E_AUDIO_ID.DOOR);
     }
     private void OnInInnerTargetDoorRange()
     {
@@ -121,7 +122,8 @@ public class CharacterInteraction : MonoBehaviour, IVertAxisLayering {
             LevelManager.ref_lvlManager.OnNewDay();
         targetBuilding = null;
         targetRoomToLeave = null;
-        isInRoom = false;       
+        isInRoom = false;
+        AudioManager.instance.CreateSoundObject(AudioManager.E_AUDIO_ID.DOOR);
     }
 
 

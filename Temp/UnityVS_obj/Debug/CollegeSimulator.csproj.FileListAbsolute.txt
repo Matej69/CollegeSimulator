@@ -1,0 +1,13 @@
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\UnityEditor.dll
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\UnityEngine.dll
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\UnityEngine.xml
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_bin\Debug\UnityEditor.xml
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_obj\Debug\CollegeSimulator.csprojResolveAssemblyReference.cache
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
+E:\ProgramingProjects\CollegeSimulator\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb

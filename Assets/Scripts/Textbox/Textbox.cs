@@ -9,12 +9,16 @@ public class Textbox : MonoBehaviour {
     static public bool isTextboxActive = false;
     private static Textbox instance;
 
+    public GameObject ref_content;
+
     private List<TextboxMessageInfo> messages = new List<TextboxMessageInfo>();
 
     Timer displayNewLetter;
 
     Text messageDisplayed;
     Text nextMessage;
+
+    
    
     static public Textbox GetInstance()
     {
@@ -23,8 +27,8 @@ public class Textbox : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        messageDisplayed = transform.FindChild("Message").GetComponent<Text>();
-        nextMessage = transform.FindChild("PressEMessage").GetComponent<Text>();
+        messageDisplayed = ref_content.transform.FindChild("Message").GetComponent<Text>();
+        nextMessage = ref_content.transform.FindChild("PressEMessage").GetComponent<Text>();
 
         displayNewLetter = new Timer(0.055f);        
     }
@@ -75,13 +79,13 @@ public class Textbox : MonoBehaviour {
     public void EnableMessageBox(List<TextboxMessageInfo> _msgs)
     {
         messages = _msgs;
-        GetComponent<Canvas>().enabled = true;
+        ref_content.SetActive(true);
         Textbox.isTextboxActive = true;        
     }    
 
     void DisableMessageBox()
     {
-        GetComponent<Canvas>().enabled = false;
+        ref_content.SetActive(false);
         Textbox.isTextboxActive = false;
     }
 

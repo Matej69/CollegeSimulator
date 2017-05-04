@@ -58,9 +58,13 @@ public class InteractableEntity : MonoBehaviour
     }
     protected bool IsMouseOnIteractableEntity()
     {
-        float dist = Vector2.Distance(gameObject.transform.position, MultiplatformInput.GetInputPos());
-        if (dist < interactionRadius)
-            return true;
+        //if content is visible return false -> when DialogBoxGUI is on screen mouse and interactable object can not interact
+        if (!DialogBox.ref_instance.IsContentVisible())
+        {
+            float dist = Vector2.Distance(gameObject.transform.position, MultiplatformInput.GetInputPos());
+            if (dist < interactionRadius)
+                return true;
+        }
         return false;
     }
 

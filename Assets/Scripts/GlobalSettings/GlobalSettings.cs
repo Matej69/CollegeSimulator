@@ -3,8 +3,8 @@ using System.Collections;
 
 public class GlobalSettings : MonoBehaviour {
 
-    public bool isFramerateLocked = true;
-    public int lockTo = 20;
+    public bool isFramerateLocked = false;
+    public int lockTo = 3;
 
 	// Use this for initialization
 	void Start () {

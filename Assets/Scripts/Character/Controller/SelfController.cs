@@ -22,8 +22,8 @@ public class SelfController : AController {
 
     float radius = 0.2f;
 
-    private float movementSpeed = 3;
-
+    private float movementSpeed = 30;
+    
 
     void Awake()
     {
@@ -39,11 +39,10 @@ public class SelfController : AController {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         if (characterStats.controlType == E_CHAR_CONTROLER.SELF_CONTROL)
             HandleMovement();
-
     }
 
 
@@ -51,11 +50,16 @@ public class SelfController : AController {
 
     override public void HandleMovement()
     {
+        //turn sprite depending on rigid.velocity
+        if (rigid.velocity.x > 0)
+            Rotate(E_SIDE.RIGHT);
+        else
+            Rotate(E_SIDE.LEFT);
+
         if (pathInfo.targetPoint != null)
         {
             Vector2 dir = (pathInfo.targetPoint.position - transform.position).normalized;
-            rigid.velocity = dir * movementSpeed;
-            transform.Translate(dir * movementSpeed * Time.deltaTime);
+            rigid.velocity = dir * movementSpeed * Time.deltaTime;
             //if reached set new target point
             if (IsTargetPointReached())
             {
@@ -107,8 +111,8 @@ public class SelfController : AController {
 
     private void SetRandomSpeed()
     {
-        movementSpeed = Random.Range(0.65f, 2.1f);
-        if (movementSpeed < 1.7f)
+        movementSpeed = Random.Range(65f, 120f);
+        if (movementSpeed < 100f)
             characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.WALKING);
         else
             characterStats.SetActionState(CharacterInfo.E_CHAR_ACTION.RUNNING);

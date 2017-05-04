@@ -14,8 +14,8 @@ public class LevelManager : MonoBehaviour {
     */
 
     static public LevelManager ref_lvlManager;
-    static int MAX_CHAR = 200;
-    static int MAX_DAYS = 100;
+    static int MAX_CHAR = 100;
+    static int MAX_DAYS = 30;
     public static int MAX_ECTS = 180;
     static int curDay = 0;
 
@@ -154,7 +154,6 @@ public class LevelManager : MonoBehaviour {
         {
             NewDayText.instance.EnableText((LevelManager.MAX_DAYS - curDay) + " DAYS LEFT ");
             LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo.AddStatsValue(StatsInfo.E_STATS_ID.ENERGY_MAX, 1);
-            LevelManager.ref_lvlManager.controlledCharacter.GetComponent<CharacterStatus>().statsInfo.AddStatsValue(StatsInfo.E_STATS_ID.HUNGER_MAX, 1);
         }
     }
 
